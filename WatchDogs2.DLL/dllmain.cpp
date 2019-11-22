@@ -42,7 +42,7 @@ DWORD WINAPI dll_mains(HMODULE hModule)
 		int money = *(int*)(pMoney);
 		if (GetAsyncKeyState(VK_INSERT))
 		{
-			*(int*)pMoney = 999;
+			*(int*)pMoney = 1000000;
 			std::cout<<std::hex<<pMoney<<std::dec << " > " <<money<<"\n";
 		}
 		if (GetAsyncKeyState(VK_END))
