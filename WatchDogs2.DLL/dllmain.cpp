@@ -9,10 +9,14 @@ struct values
 {
 	uintptr_t money;
 	uintptr_t moduleBase;
+	uintptr_t points;
+	int moneyAmmount = 0;
+	int pointsAmmount = 0;
 }vals;
 struct offsets
 {
 	DWORD moneyOffsetBase = 0x3C82200;
+	DWORD pointsOffsetBase = 0x3AD1BA0;
 }offs;
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
@@ -35,19 +39,28 @@ DWORD WINAPI dll_mains(HMODULE hModule)
 
 	vals.moduleBase = (uintptr_t)GetModuleHandle("Disrupt_64.dll");
 	std::cout << vals.moduleBase;
-	uintptr_t pMoney = FindDMAAddy(vals.moduleBase + offs.moneyOffsetBase, { 0x38,0x50,0x68,0x18,0xE0,0x0,0x840 }); //CRASH OCCURS HERE
-	
-	while (true)
+	vals.money = FindDMAAddy(vals.moduleBase + offs.moneyOffsetBase, { 0x38,0x50,0x68,0x18,0xE0,0x0,0x840 }); 
+	//vals.points = FindDMAAddy(vals.moduleBase + offs.pointsOffsetBase, { 0x1C0,0x0,0x0,0x70,0x10,0xE0,0x20 });
+ 	while (true)
 	{
-		int money = *(int*)(pMoney);
+		vals.moneyAmmount = *(int*)(vals.money);
+		/*vals.pointsAmmount = *(int*)vals.points;*/
 		if (GetAsyncKeyState(VK_INSERT))
 		{
-			*(int*)pMoney = 999;
-			std::cout<<std::hex<<pMoney<<std::dec << " > " <<money<<"\n";
+			*(int*)vals.money = *(int*)vals.money + 1000000;
+			/**(int*)vals.points =*(int*)vals.points + 1000000;*/
+			system("cls");
+			std::cout<<std::hex<<vals.money<<std::dec << " > " << vals.moneyAmmount <<"\n";
+			/*std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";*/
+			Sleep(500);
+			
 		}
 		if (GetAsyncKeyState(VK_END))
 		{
-			std::cout << std::hex <<pMoney << " > "<<std::dec<<money<<"\n";
+			system("cls");
+			std::cout << std::hex <<vals.money << " > "<<std::dec<< vals.moneyAmmount <<"\n";
+			/*std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";*/
+			Sleep(500);
 		}
 		
 	}
