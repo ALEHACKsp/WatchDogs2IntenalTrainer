@@ -16,7 +16,7 @@ struct values
 struct offsets
 {
 	DWORD moneyOffsetBase = 0x3C82200;
-	DWORD pointsOffsetBase = 0x3AD1BA0;
+	DWORD pointsOffsetBase = 0x3D10698;
 }offs;
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
@@ -40,18 +40,18 @@ DWORD WINAPI dll_mains(HMODULE hModule)
 	vals.moduleBase = (uintptr_t)GetModuleHandle("Disrupt_64.dll");
 	std::cout << vals.moduleBase;
 	vals.money = FindDMAAddy(vals.moduleBase + offs.moneyOffsetBase, { 0x38,0x50,0x68,0x18,0xE0,0x0,0x840 }); 
-	//vals.points = FindDMAAddy(vals.moduleBase + offs.pointsOffsetBase, { 0x1C0,0x0,0x0,0x70,0x10,0xE0,0x20 });
+	vals.points = FindDMAAddy(vals.moduleBase + offs.pointsOffsetBase, { 0x20,0x30,0x40,0x5F0,0x190,0x20 });
  	while (true)
 	{
 		vals.moneyAmmount = *(int*)(vals.money);
-		/*vals.pointsAmmount = *(int*)vals.points;*/
+		vals.pointsAmmount = *(int*)vals.points;
 		if (GetAsyncKeyState(VK_INSERT))
 		{
 			*(int*)vals.money = *(int*)vals.money + 1000000;
-			/**(int*)vals.points =*(int*)vals.points + 1000000;*/
+			*(int*)vals.points =*(int*)vals.points + 1000000;
 			system("cls");
 			std::cout<<std::hex<<vals.money<<std::dec << " > " << vals.moneyAmmount <<"\n";
-			/*std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";*/
+			std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";
 			Sleep(500);
 			
 		}
@@ -59,7 +59,7 @@ DWORD WINAPI dll_mains(HMODULE hModule)
 		{
 			system("cls");
 			std::cout << std::hex <<vals.money << " > "<<std::dec<< vals.moneyAmmount <<"\n";
-			/*std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";*/
+			std::cout << std::hex << vals.points << std::dec << " > " << vals.pointsAmmount << "\n";
 			Sleep(500);
 		}
 		
