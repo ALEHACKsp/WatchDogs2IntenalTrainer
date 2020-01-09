@@ -4,7 +4,7 @@
 
 1. Infinite money.
 
-### Features to be added:
+### Features currently in trainer:
 
 1. ~~Infinite money~~
 2. Infinite Health
