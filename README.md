@@ -1,10 +1,6 @@
 # WatchDogs2IntenalTrainer
 
-### Features currently in:
-
-1. Infinite money.
-
-### Features currently in trainer:
+### Features to be added:
 
 1. ~~Infinite money~~
 2. Infinite Health
