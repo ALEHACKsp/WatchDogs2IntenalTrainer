@@ -1,10 +1,6 @@
 # WatchDogs2IntenalTrainer
 
-### Features to be added:
+### I added infinite health and money in the code as a base for other programmers.
 
-1. ~~Infinite money~~
-2. Infinite Health
-3. Infinite Ammo
-4. Infinite LevelUp points
-5. No wanted level
-6. Teleporting
+
+#### If you want to continue development just find offsets in cheat engine.
